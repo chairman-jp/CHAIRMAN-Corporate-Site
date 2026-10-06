@@ -1899,6 +1899,10 @@ body.page-news .news-archive__link--visual:focus-visible .news-archive__body h2:
   line-height: 1.7;
 }
 
+.rich-text__figure--caption-end figcaption {
+  text-align: right;
+}
+
 .article__support {
   display: grid;
   gap: 20px;

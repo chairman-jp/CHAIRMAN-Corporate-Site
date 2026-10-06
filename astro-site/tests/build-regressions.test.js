@@ -309,16 +309,18 @@ test("home build shows inline news summary copy and three corporate tags", () =>
   const dom = new JSDOM(readBuiltHtml("index.html"));
   const { document } = dom.window;
   const newsItems = Array.from(document.querySelectorAll(".news-list--inline .news-list__item"));
-  const mediaNewsItem = newsItems.find((item) => item.textContent?.includes("美的スペシャル6月号増刊"));
-
   assert.ok(newsItems.length > 0, "Expected the home page to render inline news items");
-  assert.ok(mediaNewsItem, "Expected the home page inline news list to include the media coverage article");
-  assert.ok(
-    mediaNewsItem.textContent?.includes(
-      "株式会社小学館発行の美容誌『美的スペシャル6月号増刊』にて、弊社が運営する「KOSOLIFE」をタレントの指原莉乃様の美容習慣としてご紹介いただきました。"
-    )
-  );
-  assert.ok(mediaNewsItem.textContent?.includes("メディア掲載 / KOSOLIFE"));
+
+  // 記事の追加で先頭3件は入れ替わるため、特定の記事ではなく各項目の構造を検証する
+  for (const item of newsItems) {
+    const title = item.querySelector(".news-list__body > strong")?.textContent?.trim();
+    const summary = item.querySelector(".news-list__body > span:last-child")?.textContent?.trim();
+    const tags = item.querySelector(".news-list__meta > span")?.textContent?.trim();
+
+    assert.ok(title, "Expected each inline news item to have a title");
+    assert.ok(summary, `Expected the inline news item "${title}" to show its summary copy`);
+    assert.ok(tags, `Expected the inline news item "${title}" to show its category tags`);
+  }
 });
 
 test("home build clips horizontal overflow on mobile", () => {

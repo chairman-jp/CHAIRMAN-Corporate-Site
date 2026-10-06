@@ -3,6 +3,13 @@ import jfcStageImage from "../assets/images/JFC_stage_image.webp";
 import bitekiCoverImage from "../assets/images/news/biteki-2026-06-koso-life/cover.jpg";
 import livaponOpenImage from "../assets/images/news/livapon-online-store-launch/cover.svg";
 import jfcaCoverImage from "../assets/images/news/livapon-japan-festival-canada-2026/cover.jpg";
+import jfcaReportCoverImage from "../assets/images/news/livapon-japan-festival-canada-2026-report/cover.jpg";
+import jfcaReportSpeechImage from "../assets/images/news/livapon-japan-festival-canada-2026-report/opening-speech.jpg";
+import jfcaReportGiftImage from "../assets/images/news/livapon-japan-festival-canada-2026-report/gift-presentation.jpg";
+import jfcaReportCalligraphyImage from "../assets/images/news/livapon-japan-festival-canada-2026-report/calligraphy.jpg";
+import jfcaReportBoothImage from "../assets/images/news/livapon-japan-festival-canada-2026-report/booth.jpg";
+import jfcaReportLuckyDrawImage from "../assets/images/news/livapon-japan-festival-canada-2026-report/lucky-draw.jpg";
+import type { ImageMetadata } from "astro";
 import type { NewsArticle } from "../lib/types";
 import { buildExcerpt } from "../lib/format";
 
@@ -13,6 +20,10 @@ const tanaka = {
   image: ceoImage
 };
 
+function figure(image: ImageMetadata, alt: string, caption: string) {
+  return `<figure class="rich-text__figure rich-text__figure--caption-end"><img src="${image.src}" alt="${alt}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"><figcaption>${caption}</figcaption></figure>`;
+}
+
 function article(partial: Omit<NewsArticle, "excerpt">): NewsArticle {
   return {
     ...partial,
@@ -21,6 +32,45 @@ function article(partial: Omit<NewsArticle, "excerpt">): NewsArticle {
 }
 
 export const mockNews: NewsArticle[] = [
+  article({
+    id: "livapon-japan-festival-canada-2026-report",
+    slug: "livapon-japan-festival-canada-2026-report",
+    title: "LIVAPON、JAPAN FESTIVAL CANADA 2026にHeritage Partnerとして参加",
+    description:
+      "LIVAPONは、2026年8月15日・16日にカナダ・ミシサガ市で開催された「JAPAN FESTIVAL CANADA 2026」にHeritage Partnerとして参加しました。",
+    publishedAt: "2026-10-05T00:00:00.000Z",
+    categories: [
+      { id: "livapon", name: "LIVAPON" },
+      { id: "overseas-expansion", name: "海外展開" }
+    ],
+    eyecatch: jfcaReportCoverImage,
+    author: tanaka,
+    contentHtml: `
+      <p>株式会社CHAIRMANが運営する、日本の職人やものづくりのプレゼンスを世界で高めていくプロジェクト「LIVAPON」は、2026年8月15日・16日にカナダ・ミシサガ市で開催された「JAPAN FESTIVAL CANADA 2026」にHeritage Partnerとして参加しました。</p>
+      <p>会場にはLIVAPONのブランドブースを設置し、日本から持ち込んだブランド・商品の展示販売を実施しました。</p>
+      <p>また、イベント期間中には、文化交流を目的としたさまざまな企画にも参加・運営しました。</p>
+      <h2>ミシサガ市×刈谷市 姉妹都市提携45周年</h2>
+      <p>8月15日に行われたオープニングセレモニーでは、開催都市であるカナダ・ミシサガ市と愛知県刈谷市の姉妹都市提携45周年を記念し、LIVAPONよりお祝いの言葉を述べるとともに、日本の工芸品を記念品として寄贈しました。</p>
+      <p>寄贈品には、埼玉県の豊田彫刻工房・豊田様よりご提供いただいた木工彫刻を使用。</p>
+      <p>日本とカナダを長年つないできた両都市の節目に、日本の職人技を通じて交流する機会となりました。</p>
+      <h2>直島町×ティミンズ市 姉妹都市提携45周年記念 書道パフォーマンス</h2>
+      <p>香川県直島町とカナダ・ティミンズ市の姉妹都市提携45周年を記念したステージでは、LIVAPONの書道家Yuukaによる書道パフォーマンスを実施しました。</p>
+      <p>ステージ上で記念作品を制作し、完成した書道作品を友好の証としてティミンズ市へ寄贈しました。</p>
+      <h2>LIVAPON Lucky Drawを開催</h2>
+      <p>イベント1日目の夕方には、LIVAPONが企画・運営する「Lucky Draw（大抽選会）」を開催しました。</p>
+      <p>LIVAPONが日本から持ち込んだブランド各社より協賛いただいた商品をはじめ、日本での特別な宿泊体験などを景品として用意し、来場者の皆様へプレゼントしました。</p>
+      <p>日本の商品を知っていただくだけでなく、その背景にある文化や地域、体験にも触れていただく機会となりました。</p>
+      <h2>日本の職人・文化を世界へ</h2>
+      <p>今回のJAPAN FESTIVAL CANADA 2026への参加では、日本から商品を持ち込むだけでは分からなかった現地での反応やニーズ、今後の海外展開に向けた課題など、多くの知見を得ることができました。</p>
+      <p>LIVAPONでは今後も、日本各地に受け継がれてきた伝統工芸や伝統食品をはじめ、職人の技術、文化、そしてその背景にあるストーリーを世界へ届けていきます。</p>
+      <p>日本の職人と世界をつなぎ、その価値が世界で正しく評価される機会を創出してまいります。</p>
+      ${figure(jfcaReportBoothImage, "LIVAPONブースの前に並ぶスタッフ", "会場に設置したLIVAPONブース")}
+      ${figure(jfcaReportSpeechImage, "オープニングセレモニーでスピーチするLIVAPONの登壇者", "オープニングセレモニーでのスピーチ")}
+      ${figure(jfcaReportGiftImage, "木工彫刻の記念品を手にした記念撮影", "記念品の贈呈<br>豊田彫刻工房様よりご提供いただいた木工彫刻")}
+      ${figure(jfcaReportCalligraphyImage, "ステージ上で書道作品を制作する書道家Yuuka", "書道家Yuukaによる書道パフォーマンス")}
+      ${figure(jfcaReportLuckyDrawImage, "ステージ上で行われたLIVAPON Lucky Drawの様子", "LIVAPON Lucky Draw（大抽選会）の様子")}
+    `
+  }),
   article({
     id: "livapon-japan-festival-canada-2026",
     slug: "livapon-japan-festival-canada-2026",

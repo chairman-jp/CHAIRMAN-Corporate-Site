@@ -169,10 +169,18 @@ if (prefersReducedMotion) {
 } else if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("is-awaiting-reveal"));
 
+  const revealRatio = 0.18;
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        // 画面の高さより十分に長い要素（長文記事の本文など）は可視率が revealRatio に
+        // 届かず永久に非表示になるため、画面に入った時点で表示する
+        const rootHeight = entry.rootBounds?.height ?? window.innerHeight;
+        const isTallerThanRevealArea = entry.boundingClientRect.height * revealRatio > rootHeight;
+        if (
+          entry.isIntersecting &&
+          (entry.intersectionRatio >= revealRatio || isTallerThanRevealArea)
+        ) {
           entry.target.classList.remove("is-awaiting-reveal");
           entry.target.classList.add("is-visible");
           observer.unobserve(entry.target);
@@ -180,7 +188,7 @@ if (prefersReducedMotion) {
       });
     },
     {
-      threshold: 0.18,
+      threshold: [0, revealRatio],
       rootMargin: "0px 0px -32px 0px"
     }
   );
