@@ -50,4 +50,6 @@ export interface TeamMember {
   name: string;
   role: string;
   image: ImageMetadata;
+  /** true のメンバーはサイトに表示しない（データは残す） */
+  hidden?: boolean;
 }

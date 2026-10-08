@@ -611,3 +611,20 @@ test("live htaccess redirects legacy detail ids to article slugs before fallback
   assert.equal(htaccess.includes("RewriteRule ^news-detail\\.html$ /sns-marketing/%1/? [R=301,L,NC]"), true);
   assert.equal(htaccess.includes("RewriteRule ^news-detail\\.html$ /sns-marketing/? [R=301,L]"), true);
 });
+
+test("about-us build lists management team in order and omits hidden members", () => {
+  runBuild({
+    CI: "",
+    MICROCMS_SERVICE_DOMAIN: "",
+    MICROCMS_API_KEY: "",
+    MICROCMS_ENDPOINT: "blog"
+  });
+
+  const dom = new JSDOM(readBuiltHtml(path.join("about-us", "index.html")));
+  const { document } = dom.window;
+  const names = Array.from(document.querySelectorAll(".team-minimal-grid-project .team-minimal-name")).map((node) =>
+    node.textContent.trim()
+  );
+
+  assert.deepEqual(names, ["松本 恭平", "林 健斗", "本間 大嗣", "宮下 蒼一朗", "石井 克樹", "杉本 雅"]);
+});

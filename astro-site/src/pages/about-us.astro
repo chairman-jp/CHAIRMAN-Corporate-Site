@@ -131,7 +131,7 @@ const base = import.meta.env.BASE_URL;
             <p>マネジメントチーム</p>
           </div>
           <div class="team-minimal-grid team-minimal-grid-project">
-            {projectTeam.map((member) => (
+            {projectTeam.filter((member) => !member.hidden).map((member) => (
               <article class="team-minimal-item" data-reveal>
                 <div class="team-minimal-image">
                   <img

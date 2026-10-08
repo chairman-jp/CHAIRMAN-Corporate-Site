@@ -3,6 +3,7 @@ import cooImage from "../assets/images/COO-image.webp";
 import csoImage from "../assets/images/CSO-image.webp";
 import travelImage from "../assets/images/teamMemberImage1.jpg";
 import mrTokyoImage from "../assets/images/mr_tokyo_image.webp";
+import matsumotoImage from "../assets/images/teamMemberImage-matsumoto.jpg";
 import hayashiImage from "../assets/images/teamMemberImage4.jpg";
 import marketerOne from "../assets/images/teamMemberImage2.jpg";
 import miyashitaImage from "../assets/images/teamMemberImage-miyashita.jpg";
@@ -70,10 +71,11 @@ export const mediaProfiles: MediaProfile[] = [
 ];
 
 export const projectTeam: TeamMember[] = [
+  { name: "松本 恭平", role: "SNSマーケター", image: matsumotoImage },
   { name: "林 健斗", role: "SNSマーケター", image: hayashiImage },
   { name: "本間 大嗣", role: "SNSマーケター", image: marketerOne },
   { name: "宮下 蒼一朗", role: "開発・映像クリエイター", image: miyashitaImage },
   { name: "石井 克樹", role: "映像クリエイター", image: creatorOne },
-  { name: "金 優樹", role: "映像クリエイター", image: creatorTwo },
+  { name: "金 優樹", role: "映像クリエイター", image: creatorTwo, hidden: true },
   { name: "杉本 雅", role: "映像クリエイター", image: creatorThree }
 ];
